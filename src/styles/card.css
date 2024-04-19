@@ -1,0 +1,46 @@
+:root {
+  --color1: rgba(45, 18, 78, 0.527);
+  --color2: rgba(22, 19, 49, 0.541);
+  --color3: rgb(168, 238, 127);
+  --color4: rgb(127, 243, 60);
+  --color5: rgba(22, 19, 49, 0);
+
+  --x: 0px;
+  --y: 0px;
+}
+
+.opacity-blur {
+  position: relative;
+  backdrop-filter: blur(5px);
+  background: var(--color2);
+  opacity: 0.95;
+}
+
+.opacity-blur::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color5);
+}
+
+.opacity-blur:hover::before {
+  background: radial-gradient(
+    circle farthest-side at var(--x) var(--y),
+    var(--color1) 0%,
+    var(--color5) 80%
+  );
+  opacity: 1;
+  animation: opacity 0.3s forwards;
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

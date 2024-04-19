@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react"
+import "../styles/card.css"
 
 const Card = () => {
   const cardRef = useRef<HTMLDivElement>(null)
