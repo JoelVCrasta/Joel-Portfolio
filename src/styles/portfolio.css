@@ -1,0 +1,66 @@
+.portfolio-container {
+  transform: rotateZ(-30deg);
+}
+
+.portfolio1 {
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  animation: portfolio 7s linear infinite alternate,
+    marquee1 20s linear infinite;
+}
+
+.portfolio2 {
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  animation: portfolio 7s linear infinite alternate,
+    marquee2 20s linear infinite;
+}
+
+@keyframes portfolio {
+  0% {
+    background-size: 200% 100%;
+    background-position: 0% 50%;
+  }
+  100% {
+    background-size: 200% 100%;
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes marquee1 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@keyframes marquee2 {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 3s ease-in-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+}
