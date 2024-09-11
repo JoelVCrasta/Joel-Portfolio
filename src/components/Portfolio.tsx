@@ -12,61 +12,23 @@ const Portfolio = () => {
     return () => clearTimeout(timer)
   }, [])
 
+  const MarqueeText = ({ num }: { num: number }) => {
+    return (
+      <div className="flex w-full h-full overflow-hidden text-huge font-led portfolio-container">
+        <p className={`portfolio${num} text-transparent`}>portfolio&nbsp;</p>
+        <p className={`portfolio${num} text-transparent`}>portfolio&nbsp;</p>
+        <p className={`portfolio${num} text-transparent`}>portfolio&nbsp;</p>
+        <p className={`portfolio${num} text-transparent`}>portfolio&nbsp;</p>
+      </div>
+    )
+  }
+
   return (
     <>
       <section className={`fade-in ${isVisible ? "visible" : ""}`}>
-        <div className="flex w-full h-full overflow-hidden text-huge font-led portfolio-container">
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-        </div>
-        <div className="flex w-full h-full overflow-hidden text-huge font-led portfolio-container">
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-        </div>
-        <div className="flex w-full h-full overflow-hidden text-huge font-led portfolio-container">
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-        </div>
-        <div className="flex w-full h-full overflow-hidden text-huge font-led portfolio-container">
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-        </div>
-        <div className="flex w-full h-full overflow-hidden text-huge font-led portfolio-container">
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-        </div>
-        <div className="flex w-full h-full overflow-hidden text-huge font-led portfolio-container">
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-        </div>
-        <div className="flex w-full h-full overflow-hidden text-huge font-led portfolio-container">
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio1 text-transparent">portfolio&nbsp;</p>
-        </div>
-        <div className="flex w-full h-full overflow-hidden text-huge font-led portfolio-container">
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-          <p className="portfolio2 text-transparent">portfolio&nbsp;</p>
-        </div>
+        {[...Array(8)].map((_, idx) => (
+          <MarqueeText key={idx} num={idx & 1 ? 2 : 1} />
+        ))}
       </section>
     </>
   )

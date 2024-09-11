@@ -9,6 +9,7 @@ export default {
         zector: ["Zector", "monospace", "sans-serif"],
         marde: ["MARDE SAUVE", "monospace", "sans-serif"],
         neuropolitical: ["neuropolitical rg", "monospace", "sans-serif"],
+        pilowlava: ["Pilowlava", "monospace", "sans-serif"],
       },
       width: {
         800: "800px",
@@ -20,7 +21,7 @@ export default {
         1: "1px",
       },
       colors: {
-        lime: "#a8ee7fb7",
+        limee: "#a8ee7fb7",
       },
     },
   },
