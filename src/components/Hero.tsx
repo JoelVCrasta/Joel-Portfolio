@@ -15,14 +15,17 @@ const About = () => {
 
   return (
     <>
-      <section className="text-lime-300 w-800 h-full flex justify-center items-center">
-        <section className="space-y-8 intro-box ml-30">
-          <section className="text-4xl p-10 h-auto font-marde name">
+      <section className="text-lime-300 w-5/12 h-full flex justify-center items-center">
+        <section className="space-y-8 intro-box">
+          {/* Name section  */}
+          <section className="text-4xl h-auto font-marde">
             <p className="text-7xl mb-5">JOEL</p>
             <p className="text-7xl mb-8">CRASTA</p>
-            <p>Full Stack Developer</p>
+            <p>Some Developer</p>
           </section>
-          <nav className="flex font-zector text-xl ml-10">
+
+          {/* Navbar */}
+          <nav className="flex font-zector text-xl">
             <ul className="mr-10 space-y-2">
               <li>
                 <a
