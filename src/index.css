@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @layer base {
   @font-face {
@@ -81,20 +81,6 @@ body::-webkit-scrollbar {
     var(--bg-color2) 50%
   );
 }
-
-/* .intro-box {
-  transform: perspective(500px) rotateY(30deg) translateX(-100%);
-  animation: intro-box 0.4s 1.7s ease-out forwards;
-}
-
-@keyframes intro-box {
-  0% {
-    transform: perspective(500px) rotateY(30deg) translateX(-100%);
-  }
-  100% {
-    transform: perspective(500px) rotateY(30deg) translateX(0%);
-  }
-} */
 
 .intro-box {
   opacity: 0;
