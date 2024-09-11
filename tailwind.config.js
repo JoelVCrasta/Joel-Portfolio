@@ -16,6 +16,7 @@ export default {
       },
       fontSize: {
         huge: "11rem",
+        huge_sm: "7rem",
       },
       borderWidth: {
         1: "1px",

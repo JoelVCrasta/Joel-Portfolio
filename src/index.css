@@ -100,9 +100,6 @@ body::-webkit-scrollbar {
 }
 
 .outline-box {
-  border-radius: 20px;
-  width: calc(100% - 3.5rem);
-  height: calc(100% - 3.5rem);
   animation: outline 0.4s 2s ease-out forwards;
 }
 

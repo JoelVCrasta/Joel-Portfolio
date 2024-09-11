@@ -14,7 +14,7 @@ const Portfolio = () => {
 
   const MarqueeText = ({ num }: { num: number }) => {
     return (
-      <div className="flex w-full h-full overflow-hidden text-huge font-led portfolio-container">
+      <div className="flex w-full h-full overflow-hidden text-huge_sm lg:text-huge font-led portfolio-container">
         <p className={`portfolio${num} text-transparent`}>portfolio&nbsp;</p>
         <p className={`portfolio${num} text-transparent`}>portfolio&nbsp;</p>
         <p className={`portfolio${num} text-transparent`}>portfolio&nbsp;</p>
@@ -26,7 +26,7 @@ const Portfolio = () => {
   return (
     <>
       <section className={`fade-in ${isVisible ? "visible" : ""}`}>
-        {[...Array(8)].map((_, idx) => (
+        {[...Array(10)].map((_, idx) => (
           <MarqueeText key={idx} num={idx & 1 ? 2 : 1} />
         ))}
       </section>

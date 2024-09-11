@@ -1,21 +1,23 @@
-import { useRef, useEffect } from "react"
 import Keyboard from "../canvas/Keyboard"
-import About from "../components/About"
-import { gsap } from "gsap"
+import Hero from "../components/Hero"
 import Portfolio from "../components/Portfolio"
-import Particles from "../canvas/Particles"
 
 const Page1 = () => {
   return (
-    <div className="gradient-bg">
-      <div className="absolute w-full h-full flex justify-center items-center">
-        {/* outline-box */}
-        <div className="outline-box absolute"></div>
+    <section className="gradient-bg">
+      {/* Backgroung marquee animation */}
+      <div className="flex justify-center items-center w-full h-full absolute">
         <Portfolio />
       </div>
+
+      {/* outline-box */}
+      <div className="flex justify-center items-center w-full h-full absolute p-3 md:p-6">
+        <div className="w-full h-full rounded-lg lg:rounded-xl outline-box"></div>
+      </div>
+
       <Keyboard />
-      <About />
-    </div>
+      <Hero />
+    </section>
   )
 }
 
