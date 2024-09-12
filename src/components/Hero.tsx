@@ -6,7 +6,7 @@ const About = () => {
 
   return (
     <section className="flex justify-center items-end lg:justify-start lg:items-center w-full h-full pb-12 md:pb-24 lg:pb-0 text-lime-300">
-      <section className="space-y-8 lg:mx-16 intro-box">
+      <section className="space-y-8 lg:mx-40 intro-box">
         {/* Name section  */}
         <section className="h-auto w-auto font-marde tracking-widest">
           <div className="md:flex lg:block">
@@ -21,7 +21,7 @@ const About = () => {
         </section>
 
         {/* Navbar */}
-        <nav className="flex justify-center font-zector text-xl md:text-2xl lg:text-xl ">
+        <nav className="flex justify-center font-zector text-xl lg:text-xl ">
           <ul className="mr-4 md:mr-10 space-y-2">
             <li>
               <Button text={navbar[0]} href={href[0]} />

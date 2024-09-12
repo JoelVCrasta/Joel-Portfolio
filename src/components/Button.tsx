@@ -8,7 +8,7 @@ const Button = (props: ButtonProps) => {
   return (
     <a
       href={href}
-      className="w-36 md:w-44 lg:w-36 border-1 rounded-3xl border-lime-300 flex justify-center hover:bg-lime-300 hover:text-purple-900 transition-all duration-200"
+      className="w-36 md:w-44 border-1 rounded-3xl border-lime-300 flex justify-center hover:bg-lime-300 hover:text-purple-900 transition-all duration-200"
     >
       {text}
     </a>
