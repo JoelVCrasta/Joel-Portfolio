@@ -1,20 +1,26 @@
-import { useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 import * as THREE from "three"
 import gsap from "gsap"
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js"
 import * as dat from "dat.gui"
+import { Device, useDevice } from "../utils/context"
 
 const Keyboard = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const { device } = useDevice()
 
   useEffect(() => {
-    // const gui = new dat.GUI()
+    const gui = new dat.GUI()
     const gltfLoader = new GLTFLoader()
 
     // Scene
     const scene = new THREE.Scene()
 
-    let tl = gsap.timeline()
+    const mobileTimeline = gsap.timeline()
+    const desktopTimeline = gsap.timeline()
+
+    mobileTimeline.pause()
+    desktopTimeline.pause()
 
     // Keyboard
     gltfLoader.load("../keyboard2.gltf", (gltf) => {
@@ -23,38 +29,93 @@ const Keyboard = () => {
       gltf.scene.position.set(0, -1.5, -0.2)
       scene.add(gltf.scene)
 
-      /* gui.add(gltf.scene.rotation, "x").min(0).max(9)
+      // DAT GUI -----------------------------------------------
+      gui.add(gltf.scene.rotation, "x").min(0).max(9)
       gui.add(gltf.scene.rotation, "y").min(0).max(9)
-      gui.add(gltf.scene.rotation, "z").min(0).max(9) */
+      gui.add(gltf.scene.rotation, "z").min(0).max(9)
 
-      tl.to(gltf.scene.position, {
+      gui.add(gltf.scene.position, "x").min(0).max(9)
+      gui.add(gltf.scene.position, "y").min(0).max(9)
+      gui.add(gltf.scene.position, "z").min(0).max(9)
+
+      gui.add(pointLight.position, "x").min(-9).max(9)
+      gui.add(pointLight.position, "y").min(-9).max(9)
+      gui.add(pointLight.position, "z").min(-9).max(9)
+
+      gui.close()
+      // -------------------------------------------------------
+
+      if (device === Device.Mobile) {
+        gltf.scene.scale.set(0.12, 0.12, 0.12)
+      }
+
+      // Mobile Animation
+      mobileTimeline.to(gltf.scene.position, {
+        y: 0,
+        duration: 1.1,
+        ease: "power3.out",
+      })
+      mobileTimeline.to(gltf.scene.rotation, {
+        x: 1.0,
+        y: -0.6,
+        duration: 1,
+        ease: "power",
+      })
+      mobileTimeline.to(
+        gltf.scene.position,
+        {
+          y: 0.15,
+          z: 0.35,
+          duration: 1,
+          ease: "expo.out",
+        },
+        "-=1"
+      )
+      mobileTimeline.to(gltf.scene.position, {
+        y: 0.13,
+        duration: 3,
+        ease: "power1.inOut",
+        yoyo: true,
+        repeat: -1,
+      })
+
+      // Desktop Animation
+      desktopTimeline.to(gltf.scene.position, {
         y: 0,
         duration: 1.5,
         ease: "power3.out",
       })
-      tl.to(
+      desktopTimeline.to(
         gltf.scene.position,
         { x: 0.2, duration: 1, ease: "power1.out" },
         "-=0.3"
       )
-      tl.to(
+      desktopTimeline.to(
         gltf.scene.rotation,
         { z: 0.8, duration: 1, ease: "expo.out" },
         "-=1"
       )
-      tl.to(
+      desktopTimeline.to(
         gltf.scene.position,
         { z: 0.3, duration: 1, ease: "expo.out" },
         "-=1"
       )
-
-      tl.to(gltf.scene.position, {
+      desktopTimeline.to(gltf.scene.position, {
         y: -0.01,
         duration: 3,
         ease: "power1.inOut",
         yoyo: true,
         repeat: -1,
       })
+
+      console.log(device)
+      if (device === Device.Desktop) {
+        mobileTimeline.pause()
+        desktopTimeline.play()
+      } else {
+        desktopTimeline.pause()
+        mobileTimeline.play()
+      }
     })
 
     // Lights
@@ -63,9 +124,6 @@ const Keyboard = () => {
     pointLight.position.y = 3
     pointLight.position.z = 4
 
-    /* gui.add(pointLight.position, "x").min(-9).max(9)
-    gui.add(pointLight.position, "y").min(-9).max(9)
-    gui.add(pointLight.position, "z").min(-9).max(9) */
     scene.add(pointLight)
 
     const sizes = {
