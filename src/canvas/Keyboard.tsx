@@ -10,7 +10,6 @@ import { desktopAnimation } from "./animations/desktop"
 const Keyboard = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { device } = useDevice()
-  const [keyboardLoaded, setKeyboardLoaded] = useState<boolean>(false)
 
   useEffect(() => {
     const gui = new dat.GUI()
