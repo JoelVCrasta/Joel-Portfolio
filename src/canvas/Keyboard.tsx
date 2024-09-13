@@ -1,23 +1,26 @@
-import { useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 import * as THREE from "three"
 import gsap from "gsap"
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js"
 import * as dat from "dat.gui"
 import { Device, useDevice } from "../utils/context"
+import { mobileAnimation } from "./animations/mobile"
+import { desktopAnimation } from "./animations/desktop"
 
 const Keyboard = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { device } = useDevice()
+  const [keyboardLoaded, setKeyboardLoaded] = useState<boolean>(false)
 
   useEffect(() => {
     const gui = new dat.GUI()
-    const gltfLoader = new GLTFLoader()
+    const gltfLoader: GLTFLoader = new GLTFLoader()
 
     // Scene
-    const scene = new THREE.Scene()
+    const scene: THREE.Scene = new THREE.Scene()
 
-    const mobileTimeline = gsap.timeline()
-    const desktopTimeline = gsap.timeline()
+    const mobileTimeline: gsap.core.Timeline = gsap.timeline()
+    const desktopTimeline: gsap.core.Timeline = gsap.timeline()
 
     mobileTimeline.pause()
     desktopTimeline.pause()
@@ -49,72 +52,17 @@ const Keyboard = () => {
         gltf.scene.scale.set(0.12, 0.12, 0.12)
       }
 
-      // Mobile Animation
-      mobileTimeline.to(gltf.scene.position, {
-        y: 0,
-        duration: 1.1,
-        ease: "power3.out",
-      })
-      mobileTimeline.to(gltf.scene.rotation, {
-        x: 1.0,
-        y: -0.6,
-        duration: 1,
-        ease: "power",
-      })
-      mobileTimeline.to(
-        gltf.scene.position,
-        {
-          y: 0.15,
-          z: 0.35,
-          duration: 1,
-          ease: "expo.out",
-        },
-        "-=1"
-      )
-      mobileTimeline.to(gltf.scene.position, {
-        y: 0.13,
-        duration: 3,
-        ease: "power1.inOut",
-        yoyo: true,
-        repeat: -1,
-      })
-
-      // Desktop Animation
-      desktopTimeline.to(gltf.scene.position, {
-        y: 0,
-        duration: 1.5,
-        ease: "power3.out",
-      })
-      desktopTimeline.to(
-        gltf.scene.position,
-        { x: 0.2, duration: 1, ease: "power1.out" },
-        "-=0.3"
-      )
-      desktopTimeline.to(
-        gltf.scene.rotation,
-        { z: 0.8, duration: 1, ease: "expo.out" },
-        "-=1"
-      )
-      desktopTimeline.to(
-        gltf.scene.position,
-        { z: 0.3, duration: 1, ease: "expo.out" },
-        "-=1"
-      )
-      desktopTimeline.to(gltf.scene.position, {
-        y: -0.01,
-        duration: 3,
-        ease: "power1.inOut",
-        yoyo: true,
-        repeat: -1,
-      })
-
-      console.log(device)
+      /* 
+        Play the timeline based on the device
+        If the device is desktop, pause the mobile timeline and play the desktop timeline
+        If the device is mobile, pause the desktop timeline and play the mobile timeline
+      */
       if (device === Device.Desktop) {
-        mobileTimeline.pause()
-        desktopTimeline.play()
+        desktopAnimation({ gltf, desktopTimeline })
+        desktopTimeline.resume()
       } else {
-        desktopTimeline.pause()
-        mobileTimeline.play()
+        mobileAnimation({ gltf, mobileTimeline })
+        mobileTimeline.resume()
       }
     })
 
@@ -131,20 +79,6 @@ const Keyboard = () => {
       height: window.innerHeight,
     }
 
-    window.addEventListener("resize", () => {
-      // Update sizes
-      sizes.width = window.innerWidth
-      sizes.height = window.innerHeight
-
-      // Update camera
-      camera.aspect = sizes.width / sizes.height
-      camera.updateProjectionMatrix()
-
-      // Update renderer
-      renderer.setSize(sizes.width, sizes.height)
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    })
-
     // Camera
     const camera = new THREE.PerspectiveCamera(
       60,
@@ -160,9 +94,25 @@ const Keyboard = () => {
     const renderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current as HTMLCanvasElement,
       alpha: true,
+      antialias: true,
     })
+
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+    window.addEventListener("resize", () => {
+      // Update sizes
+      sizes.width = window.innerWidth
+      sizes.height = window.innerHeight
+
+      // Update camera
+      camera.aspect = sizes.width / sizes.height
+      camera.updateProjectionMatrix()
+
+      // Update renderer
+      renderer.setSize(sizes.width, sizes.height)
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    })
 
     // ------------------------------------------------------------------
 
@@ -173,7 +123,7 @@ const Keyboard = () => {
     }
 
     tick()
-  }, [])
+  }, [device])
 
   return (
     <>
