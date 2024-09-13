@@ -5,17 +5,19 @@ const About = () => {
   const href: string[] = ["", "", "", ""]
 
   return (
-    <section className="flex justify-center items-end lg:justify-start lg:items-center w-full h-full pb-12 md:pb-24 lg:pb-0 text-lime-300">
-      <section className="space-y-8 lg:mx-40 intro-box">
+    <section className="flex justify-center items-end lg:justify-start lg:items-center w-full h-full pb-6 md:pb-24 lg:pb-0 text-lime-300">
+      <section className="space-y-8 md:mx-[8%] intro-box">
         {/* Name section  */}
         <section className="h-auto w-auto font-marde tracking-widest">
           <div className="md:flex lg:block">
-            <p className="mb-5 md:mr-2 lg:mr-0 text-5xl md:text-6xl lg:text-7xl ">
+            <p className="mb-2 md:mb-5 md:mr-2 lg:mr-0 text-4xl md:text-6xl lg:text-7xl">
               JOEL
             </p>
-            <p className="mb-8 text-5xl md:text-6xl lg:text-7xl">CRASTA</p>
+            <p className="mb-4 lg:mb-8 text-4xl md:text-6xl lg:text-7xl">
+              CRASTA
+            </p>
           </div>
-          <p className="text-2xl md:text-3xl lg:text-4xl md:text-center ">
+          <p className="text-xl md:text-3xl lg:text-4xl md:text-center ">
             Some Developer
           </p>
         </section>

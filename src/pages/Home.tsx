@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import Keyboard from "../canvas/Keyboard"
 import Hero from "../components/Hero"
 import Portfolio from "../components/Portfolio"
@@ -11,13 +12,13 @@ const Home = () => {
       </div>
 
       {/* outline-box */}
-      <div className="flex justify-center items-center w-full h-full absolute p-3 md:p-6">
-        <div className="w-full h-full rounded-lg lg:rounded-xl outline-box"></div>
-      </div>
 
-      <Keyboard />
+      <div className="rounded-lg lg:rounded-xl absolute inset-3 md:inset-6 outline-box"></div>
 
-      <Hero />
+      <section className="h-[100vh] content-wrapper">
+        <Keyboard />
+        <Hero />
+      </section>
     </section>
   )
 }

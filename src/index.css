@@ -66,9 +66,7 @@ body::-webkit-scrollbar {
 
 .webgl1,
 .webgl2 {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: fixed;
 }
 
 .gradient-bg {
@@ -110,5 +108,16 @@ body::-webkit-scrollbar {
 
   100% {
     border: 2px var(--outline-color) solid;
+  }
+}
+
+@media (max-width: 1024px) {
+  .content-wrapper {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .outline-box {
+    height: calc(95vh env(safe-area-inset-top) - env(safe-area-inset-bottom));
   }
 }
