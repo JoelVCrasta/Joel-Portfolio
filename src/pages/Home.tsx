@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import Keyboard from "../canvas/Keyboard"
 import Hero from "../components/Hero"
 import Portfolio from "../components/Portfolio"
