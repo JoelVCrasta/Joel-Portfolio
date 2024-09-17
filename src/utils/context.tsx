@@ -8,6 +8,8 @@ export enum Device {
 interface ContextProps {
   device: Device
   setDevice: React.Dispatch<React.SetStateAction<Device>>
+  loaded: boolean
+  setLoaded: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const Context = createContext<ContextProps | undefined>(undefined)
@@ -18,10 +20,13 @@ export const ContextProvider = ({
   children: React.ReactNode
 }) => {
   const [device, setDevice] = useState<Device>(Device.Desktop)
+  const [loaded, setLoaded] = useState<boolean>(false)
 
   const value = {
     device,
     setDevice,
+    loaded,
+    setLoaded,
   }
 
   return <Context.Provider value={value}>{children}</Context.Provider>

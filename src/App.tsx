@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { Device, useDevice } from "./utils/context"
 
 const App = () => {
-  const { device, setDevice } = useDevice()
+  const { device, setDevice} = useDevice()
 
   useEffect(() => {
     if (window.innerWidth <= 1024) {
@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <>
-      <Loader isDoneLoading={true} />
+      <Loader/>
       <Home />
       {/*  <Other /> */}
     </>
