@@ -9,7 +9,7 @@ import { desktopAnimation } from "./animations/desktop"
 
 const Keyboard = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const { device } = useDevice()
+  const { device, loaded, setLoaded } = useDevice()
 
   useEffect(() => {
     const gui = new dat.GUI()
@@ -25,45 +25,59 @@ const Keyboard = () => {
     desktopTimeline.pause()
 
     // Keyboard
-    gltfLoader.load("../keyboard2.gltf", (gltf) => {
-      gltf.scene.scale.set(0.3, 0.3, 0.3)
-      gltf.scene.rotation.set(1.6, 0, 0)
-      gltf.scene.position.set(0, -1.5, -0.2)
-      scene.add(gltf.scene)
+    gltfLoader.load(
+      "../keyboard2.gltf",
+      (gltf) => {
+        gltf.scene.scale.set(0.3, 0.3, 0.3)
+        gltf.scene.rotation.set(1.6, 0, 0)
+        gltf.scene.position.set(0, -1.5, -0.2)
+        scene.add(gltf.scene)
 
-      // DAT GUI -----------------------------------------------
-      gui.add(gltf.scene.rotation, "x").min(0).max(9)
-      gui.add(gltf.scene.rotation, "y").min(0).max(9)
-      gui.add(gltf.scene.rotation, "z").min(0).max(9)
+        if (!loaded) {
+          setTimeout(() => {
+            setLoaded(true)
+          }, 2000)
+          return
+        }
 
-      gui.add(gltf.scene.position, "x").min(0).max(9)
-      gui.add(gltf.scene.position, "y").min(0).max(9)
-      gui.add(gltf.scene.position, "z").min(0).max(9)
+        // DAT GUI -----------------------------------------------
+        gui.add(gltf.scene.rotation, "x").min(0).max(9)
+        gui.add(gltf.scene.rotation, "y").min(0).max(9)
+        gui.add(gltf.scene.rotation, "z").min(0).max(9)
 
-      gui.add(pointLight.position, "x").min(-9).max(9)
-      gui.add(pointLight.position, "y").min(-9).max(9)
-      gui.add(pointLight.position, "z").min(-9).max(9)
+        gui.add(gltf.scene.position, "x").min(0).max(9)
+        gui.add(gltf.scene.position, "y").min(0).max(9)
+        gui.add(gltf.scene.position, "z").min(0).max(9)
 
-      gui.close()
-      // -------------------------------------------------------
+        gui.add(pointLight.position, "x").min(-9).max(9)
+        gui.add(pointLight.position, "y").min(-9).max(9)
+        gui.add(pointLight.position, "z").min(-9).max(9)
 
-      if (device === Device.Mobile) {
-        gltf.scene.scale.set(0.12, 0.12, 0.12)
-      }
+        gui.close()
+        // -------------------------------------------------------
 
-      /* 
+        if (device === Device.Mobile) {
+          gltf.scene.scale.set(0.12, 0.12, 0.12)
+        }
+
+        /* 
         Play the timeline based on the device
         If the device is desktop, pause the mobile timeline and play the desktop timeline
         If the device is mobile, pause the desktop timeline and play the mobile timeline
       */
-      if (device === Device.Desktop) {
-        desktopAnimation({ gltf, desktopTimeline })
-        desktopTimeline.resume()
-      } else {
-        mobileAnimation({ gltf, mobileTimeline })
-        mobileTimeline.resume()
+        if (device === Device.Desktop) {
+          desktopAnimation({ gltf, desktopTimeline })
+          desktopTimeline.resume()
+        } else {
+          mobileAnimation({ gltf, mobileTimeline })
+          mobileTimeline.resume()
+        }
+      },
+      undefined,
+      (error) => {
+        console.error(error)
       }
-    })
+    )
 
     // Lights
     const pointLight = new THREE.PointLight(0xffffff, 100)
@@ -122,7 +136,7 @@ const Keyboard = () => {
     }
 
     tick()
-  }, [device])
+  }, [device, loaded])
 
   return (
     <>
