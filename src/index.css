@@ -80,7 +80,7 @@ body::-webkit-scrollbar {
   );
 }
 
-.intro-box {
+body.loading-complete .intro-box {
   opacity: 0;
   transform: scale(1.1, 1.1);
   animation: intro-box 0.4s 2s ease-out forwards;
@@ -97,7 +97,7 @@ body::-webkit-scrollbar {
   }
 }
 
-.outline-box {
+body.loading-complete .outline-box {
   animation: outline 0.4s 2s ease-out forwards;
 }
 

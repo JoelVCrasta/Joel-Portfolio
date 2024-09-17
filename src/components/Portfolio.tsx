@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react"
+import { useDevice } from "../utils/context"
 import "../styles/portfolio.css"
 
 const Portfolio = () => {
-  const [isVisible, setIsVisible] = useState<boolean>(false)
+  const { loaded } = useDevice()
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true)
-    }, 1800)
-
-    return () => clearTimeout(timer)
-  }, [])
+    if (loaded) {
+      const fadeIn: NodeListOf<Element> = document.querySelectorAll(".fade-in")
+      fadeIn.forEach((element) => {
+        element.classList.add("visible")
+      })
+    }
+  }, [loaded])
 
   const MarqueeText = ({ num }: { num: number }) => {
     return (
@@ -25,7 +27,7 @@ const Portfolio = () => {
 
   return (
     <>
-      <section className={`fade-in ${isVisible ? "visible" : ""}`}>
+      <section className={`fade-in ${loaded ? "visible" : ""}`}>
         {[...Array(10)].map((_, idx) => (
           <MarqueeText key={idx} num={idx & 1 ? 2 : 1} />
         ))}

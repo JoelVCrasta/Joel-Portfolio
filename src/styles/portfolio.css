@@ -2,7 +2,7 @@
   transform: rotateZ(-30deg);
 }
 
-.portfolio1 {
+body.loading-complete .portfolio1 {
   background: radial-gradient(
     circle,
     rgba(255, 255, 255, 0.1) 0%,
@@ -15,7 +15,7 @@
     marquee1 20s linear infinite;
 }
 
-.portfolio2 {
+body.loading-complete .portfolio2 {
   background: radial-gradient(
     circle,
     rgba(255, 255, 255, 0.1) 0%,
@@ -56,11 +56,11 @@
   }
 }
 
-.fade-in {
+body.loading-complete .fade-in {
   opacity: 0;
   transition: opacity 3s ease-in-out;
 }
 
-.fade-in.visible {
+body.loading-complete .fade-in.visible {
   opacity: 1;
 }

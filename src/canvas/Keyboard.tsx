@@ -6,6 +6,7 @@ import * as dat from "dat.gui"
 import { Device, useDevice } from "../utils/context"
 import { mobileAnimation } from "./animations/mobile"
 import { desktopAnimation } from "./animations/desktop"
+import { element } from "three/webgpu"
 
 const Keyboard = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -36,6 +37,7 @@ const Keyboard = () => {
         if (!loaded) {
           setTimeout(() => {
             setLoaded(true)
+            document.body.classList.add("loading-complete")
           }, 2000)
           return
         }
